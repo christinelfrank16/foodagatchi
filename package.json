@@ -12,12 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "css-loader": "^3.2.0",
+    "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.0.0",
-    "styled-jsx": "^3.2.4",
     "style-loader": "^1.0.0",
+    "styled-jsx": "^3.2.4",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

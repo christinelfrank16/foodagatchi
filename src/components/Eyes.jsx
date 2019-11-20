@@ -7,37 +7,37 @@ import sad from '../assets/images/sad.png';
 import sleeping from '../assets/images/sleeping.png';
 
 function Eyes(props) {
-  var imageName = ''
+  var imageName = '';
   switch (props.emotion) {
-    case 'sad':
-      imageName = sad;
-      break;
+  case 'sad':
+    imageName = sad;
+    break;
     
-    case 'grumpy':
-      imageName = grumpy;
-      break;
+  case 'grumpy':
+    imageName = grumpy;
+    break;
 
-    case 'lovey':
-      imageName = lovey;
-      break;
+  case 'lovey':
+    imageName = lovey;
+    break;
 
-    case 'sleeping':
-      imageName = sleeping;
-      break;
+  case 'sleeping':
+    imageName = sleeping;
+    break;
 
-    default:
-      imageName = happy;
-      break;
+  default:
+    imageName = happy;
+    break;
   }
   return (
     <div>
-        <img src = {imageName}/>
+      <img src = {imageName}/>
     </div>
-  )
+  );
 }
 
-Eyes.propType = {
+Eyes.propTypes = {
   emotion: PropTypes.string
-}
+};
 
 export default Eyes;
