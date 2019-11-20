@@ -32,6 +32,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [
+            'style-loader',
+            'css-loader'
+        ]
+      },
+      {
         test: /\.jsx?$/,
         enforce: "pre",
         loader: "eslint-loader",
@@ -39,6 +46,16 @@ module.exports = {
         options: {
           emitWarning: true,
           configFile: "./.eslintrc.json"
+          }
+        },
+        {
+          test: /\.(png|gif|jp(e*)g|svg)$/,
+          use: {
+              loader: 'url-loader',
+              options: {
+                  limit: 8000,
+                  name: 'images/[hash]-[name].[ext]'
+              }
           }
         },
         {
