@@ -1,5 +1,6 @@
 import React from 'react';
 import Foodagatchi from './Foodagatchi';
+import woodplateboard from '../assets/images/woodboardplate.png';
 import Moment from 'moment';
 
 class App extends React.Component {
@@ -8,6 +9,7 @@ class App extends React.Component {
     this.state = {
       pets: [
         {
+          id: 1,
           name: 'Fred',
           emotion: 'happy',
           timeBeforeFeed: 10,
@@ -16,13 +18,14 @@ class App extends React.Component {
           img: 'onigiri'
         },
         {
-            name: 'Dumpy',
-            emotion: 'happy',
-            timeBeforeFeed: 10,
-            timeBeforePets: 15,
-            timeBeforeSleep: 23,
-            img: 'dumpling'
-          }
+          id: 2,
+          name: 'Dumpy',
+          emotion: 'happy',
+          timeBeforeFeed: 10,
+          timeBeforePets: 15,
+          timeBeforeSleep: 23,
+          img: 'dumpling'
+        }
       ]
     };
     this.handleFeedClick = this.handleFeedClick.bind(this);
@@ -62,49 +65,51 @@ class App extends React.Component {
       thisPet.emotion = 'sad';
     } 
     else {
-        thisPet.emotion = 'happy';
+      thisPet.emotion = 'happy';
     }
     if(thisPet.timeBeforeFeed > 8 && thisPet.timeBeforePets > 12 && thisPet.timeBeforeSleep > 20){
       thisPet.emotion = 'lovey';
     }
   }
 
-  handleBedtimeClick(){
+  handleBedtimeClick(id){
     let newPetsList = this.state.pets.slice();
-    newPetsList[0].timeBeforeSleep = 23;
-    newPetsList[0].emotion = 'sleeping';
+    const pet = newPetsList.find((pet) => pet.id === id);
+    pet.timeBeforeSleep = 23;
+    pet.emotion = 'sleeping';
     this.setState({pets: newPetsList});
   }
 
-  handleFeedClick(){
+  handleFeedClick(id){
     let newPetsList = this.state.pets.slice();
-    newPetsList[0].timeBeforeFeed = 10;
+    const pet = newPetsList.find((pet) => pet.id === id);
+    pet.timeBeforeFeed = 10;
     this.setState({pets: newPetsList});
   }
 
-  handlePets(){
+  handlePets(id){
     let newPetsList = this.state.pets.slice();
-    newPetsList[0].timeBeforePets = 15;
+    const pet = newPetsList.find((pet) => pet.id === id);
+    pet.timeBeforePets = 15;
+    pet.emotion = 'lovey';
     this.setState({pets: newPetsList});
   }
 
   render(){
     return (
       <div>
-        <Foodagatchi
-          name={this.state.pets[0].name} 
-          emotion={this.state.pets[0].emotion} 
-          onFeedClick={this.handleFeedClick} 
-          onBedtimeClick={this.handleBedtimeClick}
-          onPets={this.handlePets}
-          img={this.state.pets[0].img} />
+        {this.state.pets.map((pet) => 
           <Foodagatchi
-          name={this.state.pets[1].name} 
-          emotion={this.state.pets[1].emotion} 
-          onFeedClick={this.handleFeedClick} 
-          onBedtimeClick={this.handleBedtimeClick}
-          onPets={this.handlePets}
-          img={this.state.pets[1].img} />
+            name={pet.name} 
+            emotion={pet.emotion} 
+            onFeedClick={this.handleFeedClick} 
+            onBedtimeClick={this.handleBedtimeClick}
+            onPets={this.handlePets}
+            img={pet.img} 
+            id={pet.id}
+            key={pet.id}/>
+        )}
+        <img src={woodplateboard} />
       </div>
     );
   }

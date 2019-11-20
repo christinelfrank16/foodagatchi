@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import onigiri from '../assets/images/onigiri.png';
 import dumpling  from '../assets/images/dumpling.png';
+import sushi from '../assets/images/sushi.png';
 import Eyes from './Eyes';
 
 function Foodagatchi(props) {
@@ -14,6 +15,11 @@ function Foodagatchi(props) {
     top: '29%',
     left: '36%'
   };
+  var sushiEyeStyle = {
+    position: 'absolute',
+    top: '32%',
+    left: '60%'
+  };
   var foodagatchiStyle = {
     textAlign: 'center',
     maxWidth: '500px'
@@ -21,11 +27,23 @@ function Foodagatchi(props) {
 
   function gotchiBody(bodyType){
     switch (bodyType) {
-      case 'dumpling':
-        return dumpling;
+    case 'dumpling':
+      return {
+        type: dumpling,
+        style: eyeStyle
+      };
+
+    case 'sushi':
+      return {
+        type: sushi,
+        style: sushiEyeStyle
+      };
     
-      default:
-        return onigiri;
+    default:
+      return {
+        type: onigiri,
+        style: eyeStyle
+      };
     }
   }
 
@@ -34,23 +52,23 @@ function Foodagatchi(props) {
     <div style={foodagatchiStyle}>
       <h1>{props.name}</h1>
       <div style={bodyStyle}>
-        <div style={eyeStyle}>
+        <div style={gotchiBody(props.img).style}>
           <Eyes 
             emotion = {props.emotion} />
         </div>
-        <img src = {gotchiBody(props.img)} onMouseOver={props.onPets}/>
+        <img src = {gotchiBody(props.img).type} onMouseOver={() => props.onPets(props.id)}/>
       </div>
       <div className='buttons'>
         <button 
           className='feed' 
           type='button'
-          onClick={props.onFeedClick}>
+          onClick={() => props.onFeedClick(props.id)}>
           Feed
         </button>
         <button 
           className='bedTime' 
           type='button'
-          onClick={props.onBedtimeClick}>
+          onClick={() => props.onBedtimeClick(props.id)}>
           Put to Bed
         </button>
       </div>
@@ -59,6 +77,7 @@ function Foodagatchi(props) {
 }
 
 Foodagatchi.propTypes={
+  id: PropTypes.number,
   name: PropTypes.string,
   emotion: PropTypes.string,
   onFeedClick: PropTypes.func,
