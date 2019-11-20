@@ -18,6 +18,7 @@ class App extends React.Component {
     };
     this.handleFeedClick = this.handleFeedClick.bind(this);
     this.handleBedtimeClick = this.handleBedtimeClick.bind(this);
+    this.handlePets = this.handlePets.bind(this);
   }
 
   componentDidMount(){
@@ -51,6 +52,9 @@ class App extends React.Component {
     else if((thisPet.timeBeforeFeed < 6 || thisPet.timeBeforePets < 8) || thisPet.timeBeforeSleep < 10){
       thisPet.emotion = 'sad';
     } 
+    else {
+        thisPet.emotion = 'happy';
+    }
     if(thisPet.timeBeforeFeed > 8 && thisPet.timeBeforePets > 12 && thisPet.timeBeforeSleep > 20){
       thisPet.emotion = 'lovey';
     }
@@ -69,6 +73,12 @@ class App extends React.Component {
     this.setState({pets: newPetsList});
   }
 
+  handlePets(){
+    let newPetsList = this.state.pets.slice();
+    newPetsList[0].timeBeforePets = 15;
+    this.setState({pets: newPetsList});
+  }
+
   render(){
     return (
       <div>
@@ -76,7 +86,8 @@ class App extends React.Component {
           name={this.state.pets[0].name} 
           emotion={this.state.pets[0].emotion} 
           onFeedClick={this.handleFeedClick} 
-          onBedtimeClick={this.handleBedtimeClick}/>
+          onBedtimeClick={this.handleBedtimeClick}
+          onPets={this.handlePets}/>
       </div>
     );
   }

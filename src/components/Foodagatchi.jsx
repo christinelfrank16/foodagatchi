@@ -27,7 +27,7 @@ function Foodagatchi(props) {
           <Eyes 
             emotion = {props.emotion} />
         </div>
-        <img src = {onigiri} />
+        <img src = {onigiri} onMouseOver={props.onPets}/>
       </div>
       <div className='buttons'>
         <button 
@@ -51,7 +51,8 @@ Foodagatchi.propTypes={
   name: PropTypes.string,
   emotion: PropTypes.string,
   onFeedClick: PropTypes.func,
-  onBedtimeClick: PropTypes.func
+  onBedtimeClick: PropTypes.func,
+  onPets: PropTypes.func
 };
 
 export default Foodagatchi;
