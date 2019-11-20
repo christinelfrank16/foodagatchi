@@ -12,8 +12,17 @@ class App extends React.Component {
           emotion: 'happy',
           timeBeforeFeed: 10,
           timeBeforePets: 15,
-          timeBeforeSleep: 23
-        }
+          timeBeforeSleep: 23,
+          img: 'onigiri'
+        },
+        {
+            name: 'Dumpy',
+            emotion: 'happy',
+            timeBeforeFeed: 10,
+            timeBeforePets: 15,
+            timeBeforeSleep: 23,
+            img: 'dumpling'
+          }
       ]
     };
     this.handleFeedClick = this.handleFeedClick.bind(this);
@@ -87,7 +96,15 @@ class App extends React.Component {
           emotion={this.state.pets[0].emotion} 
           onFeedClick={this.handleFeedClick} 
           onBedtimeClick={this.handleBedtimeClick}
-          onPets={this.handlePets}/>
+          onPets={this.handlePets}
+          img={this.state.pets[0].img} />
+          <Foodagatchi
+          name={this.state.pets[1].name} 
+          emotion={this.state.pets[1].emotion} 
+          onFeedClick={this.handleFeedClick} 
+          onBedtimeClick={this.handleBedtimeClick}
+          onPets={this.handlePets}
+          img={this.state.pets[1].img} />
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
-import onigiri from '../assets/images/onigiri.png';
 import PropTypes from 'prop-types';
+import onigiri from '../assets/images/onigiri.png';
+import dumpling  from '../assets/images/dumpling.png';
 import Eyes from './Eyes';
 
 function Foodagatchi(props) {
@@ -18,6 +19,16 @@ function Foodagatchi(props) {
     maxWidth: '500px'
   };
 
+  function gotchiBody(bodyType){
+    switch (bodyType) {
+      case 'dumpling':
+        return dumpling;
+    
+      default:
+        return onigiri;
+    }
+  }
+
 
   return(
     <div style={foodagatchiStyle}>
@@ -27,7 +38,7 @@ function Foodagatchi(props) {
           <Eyes 
             emotion = {props.emotion} />
         </div>
-        <img src = {onigiri} onMouseOver={props.onPets}/>
+        <img src = {gotchiBody(props.img)} onMouseOver={props.onPets}/>
       </div>
       <div className='buttons'>
         <button 
@@ -52,7 +63,8 @@ Foodagatchi.propTypes={
   emotion: PropTypes.string,
   onFeedClick: PropTypes.func,
   onBedtimeClick: PropTypes.func,
-  onPets: PropTypes.func
+  onPets: PropTypes.func,
+  img: PropTypes.string
 };
 
 export default Foodagatchi;
