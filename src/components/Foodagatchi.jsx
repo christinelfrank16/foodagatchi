@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import onigiri from '../assets/images/onigiri.png';
 import dumpling  from '../assets/images/dumpling.png';
 import sushi from '../assets/images/sushi.png';
+import tamagoyaki from '../assets/images/tamagoyaki.png'
+import wasabi from '../assets/images/wasabi.png';
 import Eyes from './Eyes';
 
 function Foodagatchi(props) {
@@ -20,6 +22,16 @@ function Foodagatchi(props) {
     top: '32%',
     left: '60%'
   };
+  var tamaEyeStyle = {
+    position: 'absolute',
+    top: '60%',
+    left: '50%'
+  };
+  var wasabiEyeStyle = {
+    position: 'absolute',
+    top: '45%',
+    left: '15%'
+  };
   var foodagatchiStyle = {
     textAlign: 'center',
     maxWidth: '500px'
@@ -33,10 +45,22 @@ function Foodagatchi(props) {
         style: eyeStyle
       };
 
+    case 'wasabi':
+      return {
+        type: wasabi,
+        style: wasabiEyeStyle
+      };
+
     case 'sushi':
       return {
         type: sushi,
         style: sushiEyeStyle
+      };
+  
+    case 'tamagoyaki':
+      return {
+        type: tamagoyaki,
+        style: tamaEyeStyle
       };
     
     default:

@@ -24,7 +24,7 @@ class App extends React.Component {
           timeBeforeFeed: 10,
           timeBeforePets: 15,
           timeBeforeSleep: 23,
-          img: 'dumpling'
+          img: 'wasabi'
         }
       ]
     };
@@ -95,9 +95,16 @@ class App extends React.Component {
     this.setState({pets: newPetsList});
   }
 
+  
   render(){
+      var background = {
+          backgroundImage: `url(${woodplateboard})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          display: 'flex'
+      }
     return (
-      <div>
+      <div style={background}>
         {this.state.pets.map((pet) => 
           <Foodagatchi
             name={pet.name} 
@@ -109,7 +116,6 @@ class App extends React.Component {
             id={pet.id}
             key={pet.id}/>
         )}
-        <img src={woodplateboard} />
       </div>
     );
   }
