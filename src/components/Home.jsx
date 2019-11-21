@@ -1,5 +1,6 @@
 import React from 'react';
 import NewFriendForm from './NewFriendForm';
+import PropTypes from 'prop-types';
 
 class Home extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Home extends React.Component {
     }
     this.formHelper = this.formHelper.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleStartGameSubmit = this.handleStartGameSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -24,18 +25,28 @@ class Home extends React.Component {
     }
     return html;
   }
-  handleSubmit(event){
+  handleCountSubmit(event){
     event.preventDefault();
   }
 
   
-  render() {
-    let _name = null;
-    let _type = null;
+  handleStartGameSubmit(event, _name, _type){
+    event.preventDefault();
+    var friendHolder = [];
+    _name.forEach((element, index) =>
+    friendHolder.push({id: index, name: element.value, img: _type[index].value})
+    );
+    // props.onNewGameSubmit({name: ''})
+    this.props.onStartGame(friendHolder)
+  }
+  
+  render(props) {
+    let _name = [];
+    let _type = [];
     return(
       <div>
         <h1>FOODAGATCHI</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleCountSubmit}>
           <label htmlFor='number'>How many friends would you like?</label>
           <select id='number' onChange={this.handleChange}>
             <option>1</option>
@@ -46,11 +57,11 @@ class Home extends React.Component {
         </form>
 
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={() => {this.handleStartGameSubmit(event, _name, _type)}}>
             {this.formHelper().map((el, index) =>
               <NewFriendForm 
-                name={input => _name = input}
-                type={select => _type = select}
+                name={input => _name.push(input)}
+                type={select => _type.push(select)}
                 key={index}/>
             )}
             <button type="submit">Start Game</button>
@@ -59,6 +70,10 @@ class Home extends React.Component {
       </div>
     )
   }
+}
+
+Home.propTypes = {
+  onStartGame: PropTypes.func
 }
 
 export default Home;

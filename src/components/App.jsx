@@ -45,6 +45,21 @@ class App extends React.Component {
     clearInterval(this.timer);
   }
 
+  handleStartGame(newFriends){
+    console.log(newFriends);
+    var newFriendList = this.state.pets.slice();
+
+    newFriendList = [];
+    newFriends.forEach((friend) => {
+        newFriend.emotion = 'happy';
+        newFriend.timeBeforeFeed = 45;
+        newFriend.timeBeforePets = 55;
+        newFriend.timeBeforeSleep = 80;
+        newFriendList.push(newFriend);
+    })
+    this.setState({pets: newFriendList});
+  }
+
   updatePetProps(){
     let newPetsList = this.state.pets.slice();
     newPetsList.forEach((pet) => this.managePetProps(pet));
@@ -107,7 +122,7 @@ class App extends React.Component {
       }
     return (
       <div style={background}>
-       <Home/>
+       <Home onStartGame={this.handleStartGame}/>
         {this.state.pets.map((pet) => 
           <Foodagatchi
             name={pet.name} 
