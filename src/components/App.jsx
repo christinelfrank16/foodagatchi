@@ -1,6 +1,8 @@
 import React from 'react';
 import Foodagatchi from './Foodagatchi';
 import woodplateboard from '../assets/images/woodboardplate.png';
+import Home from './Home';
+
 import Moment from 'moment';
 
 class App extends React.Component {
@@ -12,18 +14,18 @@ class App extends React.Component {
           id: 1,
           name: 'Fred',
           emotion: 'happy',
-          timeBeforeFeed: 10,
-          timeBeforePets: 15,
-          timeBeforeSleep: 23,
+          timeBeforeFeed: 45,
+          timeBeforePets: 55,
+          timeBeforeSleep: 80,
           img: 'onigiri'
         },
         {
           id: 2,
           name: 'Dumpy',
           emotion: 'happy',
-          timeBeforeFeed: 10,
-          timeBeforePets: 15,
-          timeBeforeSleep: 23,
+          timeBeforeFeed: 45,
+          timeBeforePets: 55,
+          timeBeforeSleep: 80,
           img: 'wasabi'
         }
       ]
@@ -58,16 +60,16 @@ class App extends React.Component {
 
 
   updateEmotion(thisPet){
-    if((thisPet.timeBeforeFeed < 3 || thisPet.timeBeforePets < 4) || thisPet.timeBeforeSleep < 5){
+    if((thisPet.timeBeforeFeed < 10 || thisPet.timeBeforePets < 15) || thisPet.timeBeforeSleep < 15){
       thisPet.emotion = 'grumpy';
     }
-    else if((thisPet.timeBeforeFeed < 6 || thisPet.timeBeforePets < 8) || thisPet.timeBeforeSleep < 10){
+    else if((thisPet.timeBeforeFeed < 20 || thisPet.timeBeforePets < 25) || thisPet.timeBeforeSleep < 30){
       thisPet.emotion = 'sad';
     } 
     else {
       thisPet.emotion = 'happy';
     }
-    if(thisPet.timeBeforeFeed > 8 && thisPet.timeBeforePets > 12 && thisPet.timeBeforeSleep > 20){
+    if(thisPet.timeBeforeFeed > 40 && thisPet.timeBeforePets > 48 && thisPet.timeBeforeSleep > 70){
       thisPet.emotion = 'lovey';
     }
   }
@@ -75,7 +77,7 @@ class App extends React.Component {
   handleBedtimeClick(id){
     let newPetsList = this.state.pets.slice();
     const pet = newPetsList.find((pet) => pet.id === id);
-    pet.timeBeforeSleep = 23;
+    pet.timeBeforeSleep = 80;
     pet.emotion = 'sleeping';
     this.setState({pets: newPetsList});
   }
@@ -83,14 +85,14 @@ class App extends React.Component {
   handleFeedClick(id){
     let newPetsList = this.state.pets.slice();
     const pet = newPetsList.find((pet) => pet.id === id);
-    pet.timeBeforeFeed = 10;
+    pet.timeBeforeFeed = 45;
     this.setState({pets: newPetsList});
   }
 
   handlePets(id){
     let newPetsList = this.state.pets.slice();
     const pet = newPetsList.find((pet) => pet.id === id);
-    pet.timeBeforePets = 15;
+    pet.timeBeforePets = 55;
     pet.emotion = 'lovey';
     this.setState({pets: newPetsList});
   }
@@ -105,6 +107,7 @@ class App extends React.Component {
       }
     return (
       <div style={background}>
+       <Home/>
         {this.state.pets.map((pet) => 
           <Foodagatchi
             name={pet.name} 
